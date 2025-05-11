@@ -1,7 +1,32 @@
+using Microsoft.EntityFrameworkCore;
+using MyRecapch.Data.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+#region Add Db Context
+builder.Services.AddDbContext<RecapchaContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Myconnection"));
+});
+#endregion
+//builder.Services.RegisterServices();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+#region GoogleRecaptcha
+//builder.Configuration.GetSection("GoogleRecapcha").Get<GoogleRecapchaViewModel>();
+#endregion
+
+
+
+
+
+
 
 var app = builder.Build();
 

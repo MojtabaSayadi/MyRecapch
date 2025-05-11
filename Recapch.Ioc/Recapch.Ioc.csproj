@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyRecapch.Core\MyRecapch.Core.csproj" />
+  </ItemGroup>
+
 </Project>
