@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using MyRecapch.Core.Services.Implementations;
+using MyRecapch.Core.Services.Interfaces;
 using MyRecapch.Data.Context;
+using MyRecapch.Data.Repositories;
+using MyRecapch.Domain.Interfaces;
+using Recapch.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +18,7 @@ builder.Services.AddDbContext<RecapchaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Myconnection"));
 });
 #endregion
-//builder.Services.RegisterServices();
+builder.Services.RegisterServices();
 //builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 
