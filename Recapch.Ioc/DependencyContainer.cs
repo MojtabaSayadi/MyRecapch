@@ -18,12 +18,8 @@ namespace Recapch.Ioc
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
-    
-
-         
-
-           // services.AddScoped<IWebContactUsRepository, WebContactUsRepository>();
-           // services.AddScoped<IWebContactUsService, WebContactUsService>();
+            services.AddScoped<IWebContactUsRepository, WebContacUsRepository>();
+            services.AddScoped<IWebContactUsService, WebContactUsService>();
 
            //services.AddScoped<IRecaptchaService, RecaptchaService>();
         }

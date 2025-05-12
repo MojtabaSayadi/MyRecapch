@@ -11,53 +11,53 @@ namespace MyRecapch.Core.Services.Implementations
 {
     public class WebContactUsService : IWebContactUsService
     {
-        public IWebContactUsRepository webContactUsRepository;
+        public IWebContactUsRepository WebContactUsRepository;
 
         public WebContactUsService(IWebContactUsRepository _webContactUsRepository)
         {
-            webContactUsRepository = _webContactUsRepository;
+            WebContactUsRepository = _webContactUsRepository;
         }
         public void Add(WebContactUs webContactUs)
         {
-            webContactUsRepository.Add(webContactUs);
+            WebContactUsRepository.Add(webContactUs);
             Save();
         }
 
         public void Delete(int id)
         {
-            webContactUsRepository.Delete(GetById(id));
+            WebContactUsRepository.Delete(GetById(id));
             Save();
         }
 
         public void Delete(WebContactUs webContactUs)
         {
-            webContactUsRepository.Delete(webContactUs);
+            WebContactUsRepository.Delete(webContactUs);
             Save();
         }
 
         public List<WebContactUs> GetAll()
         {
-           return webContactUsRepository.GetAll();
+           return WebContactUsRepository.GetAll();
         }
 
         public WebContactUs GetById(int id)
         {
-            return webContactUsRepository.GetById(id);
+            return WebContactUsRepository.GetById(id);
         }
 
         public bool IsExist(int Id)
         {
-           return webContactUsRepository.IsExist(Id);
+           return WebContactUsRepository.IsExist(Id);
         }
 
         public void Save()
         {
-            webContactUsRepository.Save();
+            WebContactUsRepository.Save();
         }
 
         public void Update(WebContactUs webContactUs)
         {
-            webContactUsRepository.Update(webContactUs);
+            WebContactUsRepository.Update(webContactUs);
             Save();
         }
     }

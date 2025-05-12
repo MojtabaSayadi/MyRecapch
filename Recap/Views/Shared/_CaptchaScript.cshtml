@@ -1,0 +1,14 @@
+﻿@using static MyRecapch.Domain.ViewModel.Security.CapchaViewModel
+@model GoogleRecapchaForViewViewModel
+
+<script src="https://www.google.com/recaptcha/api.js?render=@Model.SiteKey"></script>
+
+<script>
+    grecaptcha.ready(function () {
+        window.grecaptcha.execute('@Model.SiteKey', { action: 'index' })
+        .then(function (token) {
+            $("#captchaInput").val(token);
+        });
+    });
+</script>
+
