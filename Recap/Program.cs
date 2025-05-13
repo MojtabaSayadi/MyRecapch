@@ -4,8 +4,8 @@ using MyRecapch.Core.Services.Interfaces;
 using MyRecapch.Data.Context;
 using MyRecapch.Data.Repositories;
 using MyRecapch.Domain.Interfaces;
+using MyRecapch.Domain.ViewModel.Security;
 using Recapch.Ioc;
-using static MyRecapch.Domain.ViewModel.Security.CapchaViewModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +27,6 @@ builder.Services.RegisterServices();
 #region GoogleRecaptcha
 builder.Configuration.GetSection("GoogleRecapcha").Get<GoogleRecapchaViewModel>();
 #endregion
-
-
-
-
-
 
 
 var app = builder.Build();

@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyRecapch.Domain.ViewModel.Security;
 
 namespace MyRecapch.Domain.ViewModel.ContacUs
 {
-    public class ContacUSViewModel
+    public class ContacUSViewModel : ReCaptcha
     {
         [Required(ErrorMessage = "لطفا {0} خود را وارد کنید")]
         [Display(Name = "نام و نام خانوادگی")]

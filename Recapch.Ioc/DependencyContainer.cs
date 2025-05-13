@@ -21,7 +21,7 @@ namespace Recapch.Ioc
             services.AddScoped<IWebContactUsRepository, WebContacUsRepository>();
             services.AddScoped<IWebContactUsService, WebContactUsService>();
 
-           //services.AddScoped<IRecaptchaService, RecaptchaService>();
+           services.AddScoped<IRecaptchaService, RecaptchaService>();
         }
     }
 

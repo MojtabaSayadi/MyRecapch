@@ -1,21 +1,18 @@
-﻿@model ContacUSViewModel
+﻿
+
+@model ContacUSViewModel
 @{
 	ViewData["Title"] = "Home Page";
+	GoogleRecapchaForViewViewModel tmp = ViewData["SiteKey"] as GoogleRecapchaForViewViewModel;
+
+	
 }
-@* GoogleRecapchaForViewViewModel tmp = ViewData["SiteKey"] as GoogleRecapchaForViewViewModel; *@
-<p>
 
-</p>
-<p>
-
-</p>
-
- <div class="text-center" style="border-bottom-color:aqua">
-    <h3 class="display-4">Welcome to My Recapcha Test </h3>
+	<h3 class="display-4">Welcome to My Recapcha Test </h3>
 	<p>
 
 	</p>
-</div> 
+</div>
 <p>
 
 </p>
@@ -23,11 +20,11 @@
 
 	<div class="col-lg-12">
 		<form class="alx-contact-form" asp-action="Index" asp-controller="Home" method="post">
+			<partial name="_CaptchaInput" />
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="alx-input-group" style="border:dashed solid">
-						<input asp-for=Fullname placeholder="نام و نام خانوادگی شما ">
-						@* <i class="fa fa-user-o"></i> *@
+						<input asp-for=Fullname placeholder="نام و نام خانوادگی شما "><i class="fa fa-user-o"></i>
 					</div>
 					<div>
 						<span asp-validation-for="Fullname" style="color:red"></span>
@@ -46,16 +43,19 @@
 				</p>
 				<div class="col-lg-12">
 					<div class="alx-input-group">
-						<textarea asp-for="Message" rows="6" placeholder="پیغام "></textarea><i class="fa fa-commenting-o"></i>
+						<textarea asp-for="Message" rows="6" style="width:100%" placeholder="پیغام "></textarea><i class="fa fa-commenting-o"></i>
 					</div>
 
 					<div>
 						<span asp-validation-for="Message" style="color:red"></span>
 					</div>
-					@* 
-                <div class="alx-success-msg hide">
-                    <p>پیغام با موفقیت ارسال شد</p>
-                </div> *@
+					@if (ViewBag.AlertMessage != null)
+					{
+						<div class="alx-success-msg hide">
+							<p>@ViewBag.AlertMessage</p>
+						</div>
+					}
+
 					<input class="alx-btn" type="submit" value="ارسال پیغام">
 				</div>
 			</div>
@@ -73,4 +73,4 @@
 	</script>
 }
 
-@* <partial name="_CaptchaScript" model="@tmp" /> *@
+<partial name="_CaptchaScript" model="@tmp" />

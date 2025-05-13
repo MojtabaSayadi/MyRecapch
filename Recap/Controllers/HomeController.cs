@@ -4,6 +4,7 @@ using MyRecapch.Core.Services.Implementations;
 using MyRecapch.Core.Services.Interfaces;
 using MyRecapch.Domain.Models.Web;
 using MyRecapch.Domain.ViewModel.ContacUs;
+using MyRecapch.Domain.ViewModel.Security;
 using Recap.Models;
 using static MyRecapch.Domain.ViewModel.Security.CapchaViewModel;
 
@@ -13,25 +14,31 @@ namespace Recap.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IWebContactUsService WebContactUsService;
+        public IRecaptchaService recaptchaService { get; set; }
 
         public HomeController(ILogger<HomeController> logger, IWebContactUsService _webContactUsService)
         {
             WebContactUsService =_webContactUsService;
             _logger = logger;
+            IRecaptchaService _recaptchaService;
         }
-    /// #region GoogleRecapcha
-    //    GoogleRecapchaForViewViewModel tmp = new GoogleRecapchaForViewViewModel()
-    //    {
-    //        SiteKey = GoogleRecapchaViewModel.SiteKey
-    //    };
-    //   private IWebContactUsService _webContactUsService;
-
-        // ViewData["SiteKey"] = tmp;
-        //   #endregion
+    
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string AlertMessage)
         {
+            if(!string.IsNullOrEmpty(AlertMessage))
+                ViewBag.AlertMessage = AlertMessage;
+            #region GoogleRecapcha
+            GoogleRecapchaForViewViewModel tmp = new GoogleRecapchaForViewViewModel()
+            {
+                SiteKey = GoogleRecapchaViewModel.SiteKey
+            };
+            //private IWebContactUsService _webContactUsService;
+
+            ViewData["SiteKey"] = tmp;
+            #endregion
+
             return View(new ContacUSViewModel());
         }
         [HttpPost]
@@ -40,6 +47,12 @@ namespace Recap.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!recaptchaService.ReCaptchaPassed(model.Token, GoogleRecapchaViewModel.SecretKey))
+                {
+                    string err = "لطفا مجددا صفحه را بارگزاری کنید.";
+                    return RedirectToAction("Index", "Home", new { errmessage = err });
+                }
+
                 bool isPhoneNumber = true;
                 foreach (var item in model.PhoneNumber)
                 {
@@ -60,7 +73,7 @@ namespace Recap.Controllers
                     };
                     WebContactUsService.Add(webContactUs);//.AddWebContactUs(webContactUs);
                     //return View(new WebContactUsViewModel());
-                    return RedirectToAction("Index", "Home", new { message = "پیام شما با موفقیت دریافت شد" });
+                    return RedirectToAction("Index", "Home", new { AlertMessage = "پیام شما با موفقیت دریافت شد" });
                 }
 
                 else
