@@ -6,7 +6,7 @@ using MyRecapch.Domain.Models.Web;
 using MyRecapch.Domain.ViewModel.ContacUs;
 using MyRecapch.Domain.ViewModel.Security;
 using Recap.Models;
-using static MyRecapch.Domain.ViewModel.Security.CapchaViewModel;
+
 
 namespace Recap.Controllers
 {
